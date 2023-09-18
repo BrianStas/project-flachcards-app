@@ -9,7 +9,7 @@ function Home(){
     listDecks().then(data => setDecks(data));
   }
   useEffect(fetchData, []);
- console.log(decks)
+ 
    return (
    <div>
         <button type="button" class="btn btn-secondary">+ Create Deck</button>
