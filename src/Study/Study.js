@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { readCard, readDeck } from "../utils/api";
+import { readDeck } from "../utils/api";
 import {useParams, Link} from "react-router-dom";
 
 function Study(){
@@ -10,12 +10,27 @@ function Study(){
       }
       useEffect(fetchDeck, []);
 
-    const [cardToStudy, setCardToStudy]= useState({});
+    const [cardText, setCardText]= useState("");
     const [cardIndex, setCardIndex] = useState(0);    
-    const [isLast, setIsLast] = useState(false);
     const [isBack, setIsBack] = useState(false);
     
+    const cardList = deck.cards;
+      console.log(cardList)
+
+    function cardFlip(){
+
+    }
+        
       
+    function cardChange(){
+        setCardIndex(cardIndex + 1);
+        return (
+            <p class="card-text">
+            {deck.id && cardList[cardIndex].front}
+            </p>
+            
+
+    )}
 
     return (
     <div>
@@ -29,11 +44,11 @@ function Study(){
         <h1>Study: {deck.name}</h1> 
         <div class="card"> 
             <div class="card-body">
-                <h4 class="card-title">Card {cardIndex +1} of 3</h4>
+                <h4 class="card-title">Card {cardIndex +1} of {cardList.length}</h4>
                 <p class="card-text">
                 {deck.id && deck.cards[cardIndex].front}
                 </p>
-                <a href="#!" class="btn btn-primary">Flip</a>
+                <button class="btn btn-primary" onClick={()=> setIsBack(!isBack)}>{isBack ? "Next" : "Flip" }</button>
             </div>
         </div>
     </div>

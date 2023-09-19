@@ -6,6 +6,7 @@ import DeckScreen from "../Deck/DeckScreen";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { Route } from "react-router-dom/cjs/react-router-dom";
 import Study from "../Study/Study";
+import CreateDeck from "../Deck/CreateDeck";
 
 function Layout() {
   return (
@@ -19,6 +20,9 @@ function Layout() {
           </Route>
           <Route path="/decks/:deckId/study">
             <Study />
+          </Route>
+          <Route exact path="/decks/new">
+            <CreateDeck />
           </Route>
           <Route path="/decks/:deckId">
             <DeckScreen />

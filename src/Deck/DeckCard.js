@@ -10,7 +10,7 @@ function DeckCard({deck}){
                 <p class="card-text">
                 {deck.description}
                 </p>
-            <Link to="#" class="btn btn-secondary">View</Link>
+            <Link to={`/decks/${deck.id}`} class="btn btn-secondary">View</Link>
             <Link to={`/decks/${deck.id}/study`} class="btn btn-primary">Study</Link>
         </div>
         </div>
