@@ -22,15 +22,10 @@ function Study(){
     }
         
       
-    function cardChange(){
-        setCardIndex(cardIndex + 1);
-        return (
-            <p class="card-text">
-            {deck.id && cardList[cardIndex].front}
-            </p>
-            
-
-    )}
+    const clickHandler=()=> {
+        setIsBack(!isBack)
+        setCardIndex(cardIndex + 1)
+    }
 
     return (
     <div>
@@ -46,9 +41,10 @@ function Study(){
             <div class="card-body">
                 <h4 class="card-title">Card {cardIndex +1} of {cardList.length}</h4>
                 <p class="card-text">
-                {deck.id && deck.cards[cardIndex].front}
+                {deck.id && (isBack ? deck.cards[cardIndex].back : deck.cards[cardIndex].front)}
                 </p>
-                <button class="btn btn-primary" onClick={()=> setIsBack(!isBack)}>{isBack ? "Next" : "Flip" }</button>
+                <button class="btn btn-primary mx-2" onClick={()=> setIsBack(!isBack)}>Flip</button>
+                <button class="btn btn-secondary" onClick={clickHandler}>Next</button>
             </div>
         </div>
     </div>
