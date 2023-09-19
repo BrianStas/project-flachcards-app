@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { readDeck } from "../utils/api";
 import {useParams, Link} from "react-router-dom";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 function Study(){
     const {deckId} = useParams();
@@ -15,17 +16,23 @@ function Study(){
     const [isBack, setIsBack] = useState(false);
     
     const cardList = deck.cards;
-      console.log(cardList)
-
-    function cardFlip(){
-
-    }
-        
-      
+    
+      let history=useHistory();      
+    
     const clickHandler=()=> {
+        if((cardIndex+1) ===cardList.length){
+          if  (window.confirm("Restart cards?\nClick 'cancel' to return to the home page.")){
+            setIsBack(!isBack)
+            setCardIndex(0); 
+          }
+          else{
+            history.push("/")
+          }
+        }
+        else{
         setIsBack(!isBack)
         setCardIndex(cardIndex + 1)
-    }
+        }}
 
     return (
     <div>
@@ -44,7 +51,7 @@ function Study(){
                 {deck.id && (isBack ? deck.cards[cardIndex].back : deck.cards[cardIndex].front)}
                 </p>
                 <button class="btn btn-primary mx-2" onClick={()=> setIsBack(!isBack)}>Flip</button>
-                <button class="btn btn-secondary" onClick={clickHandler}>Next</button>
+                {isBack && <button class="btn btn-secondary" onClick={clickHandler}>Next</button>}
             </div>
         </div>
     </div>
