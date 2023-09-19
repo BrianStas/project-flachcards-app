@@ -34,6 +34,8 @@ function Study(){
         setCardIndex(cardIndex + 1)
         }}
 
+
+
     return (
     <div>
         <nav aria-label="breadcrumb">
@@ -43,8 +45,9 @@ function Study(){
                 <li class="breadcrumb-item active" aria-current="page">Study</li>
             </ol>
         </nav>  
-        <h1>Study: {deck.name}</h1> 
-        <div class="card"> 
+        <h1>Study: {deck.name}</h1>
+        { cardList.length>2 ? 
+       ( <div class="card"> 
             <div class="card-body">
                 <h4 class="card-title">Card {cardIndex +1} of {cardList.length}</h4>
                 <p class="card-text">
@@ -53,7 +56,13 @@ function Study(){
                 <button class="btn btn-primary mx-2" onClick={()=> setIsBack(!isBack)}>Flip</button>
                 {isBack && <button class="btn btn-secondary" onClick={clickHandler}>Next</button>}
             </div>
-        </div>
+        </div>)
+: 
+    (<div>
+        <h2>Not enough cards.</h2>
+        <p>You need at least 3 cards to study. There are {cardList.length} cards in this deck.</p>
+        <button class="btn btn-primary">Add Cards</button>
+    </div>)}
     </div>
     )
 }
