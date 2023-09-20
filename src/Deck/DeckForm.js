@@ -1,8 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom/cjs/react-router-dom";
+import { useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 function DeckForm({initialFormData, onSubmit, submitButtonText}){
     
+    const history = useHistory();
     const [formData, setFormData]=useState(initialFormData)
     
     function handleInput(event){
@@ -14,17 +16,15 @@ function DeckForm({initialFormData, onSubmit, submitButtonText}){
 
     function handleSubmit(event){
         event.preventDefault();
-        onSubmit(formData);
-    }
+        onSubmit(formData)
+        .then(data =>
+            history.push("/"))
+        }
+        //     createDeck(newDeck).then(data => history.push(`/decks/${data.id}`));
 
     return (
     <div class="w-100">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><Link to="/">Home</Link></li>
-                <li class="breadcrumb-item active" aria-current="page">Create Deck</li>                
-            </ol>
-        </nav>
+        
         <form onSubmit={handleSubmit}>
             <div class="form-group">
             <label htmlFor="name">
@@ -36,7 +36,7 @@ function DeckForm({initialFormData, onSubmit, submitButtonText}){
                 id="name" 
                 name="name" 
                 onChange={handleInput}
-                value={name}
+                value={formData.name}
                 placeholder="Deck Name" />
             </div>
             <div class="form-group">
@@ -49,7 +49,7 @@ function DeckForm({initialFormData, onSubmit, submitButtonText}){
                 name="description" 
                 rows={7} 
                 onChange={handleInput}
-                value={description}
+                value={formData.description}
                 placeholder="Brief description of the deck" />            
             </div>
             <button type="submit">{submitButtonText}</button>

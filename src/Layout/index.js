@@ -6,7 +6,7 @@ import DeckScreen from "../Deck/DeckScreen";
 import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { Route } from "react-router-dom/cjs/react-router-dom";
 import Study from "../Study/Study";
-import DeckForm from "../Deck/DeckForm";
+import NewDeck from "../Deck/NewDeck";
 
 function Layout() {
   return (
@@ -22,7 +22,7 @@ function Layout() {
             <Study />
           </Route>
           <Route exact path="/decks/new">
-            <DeckForm />
+            <NewDeck />
           </Route>
           <Route path="/decks/:deckId">
             <DeckScreen />
