@@ -1,11 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 
-function CreateDeck(){
-    const [name, setName] = useState("");
-    const [description, setDescription] = useState("");
-    const handleNameChange = (event) => setName(event.target.value);
-    const handleDescriptionChange = (event) => setDescription(event.target.value);
+function DeckForm({initialFormData, onSubmit, submitButtonText}){
+    
+    const [formData, setFormData]=useState(initialFormData)
+    
+    function handleInput(event){
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    function handleSubmit(event){
+        event.preventDefault();
+        onSubmit(formData);
+    }
 
     return (
     <div class="w-100">
@@ -15,7 +25,7 @@ function CreateDeck(){
                 <li class="breadcrumb-item active" aria-current="page">Create Deck</li>                
             </ol>
         </nav>
-        <form>
+        <form onSubmit={handleSubmit}>
             <div class="form-group">
             <label htmlFor="name">
                 Name
@@ -25,7 +35,7 @@ function CreateDeck(){
                 class="form-control" 
                 id="name" 
                 name="name" 
-                onChange={handleNameChange}
+                onChange={handleInput}
                 value={name}
                 placeholder="Deck Name" />
             </div>
@@ -38,11 +48,12 @@ function CreateDeck(){
                 class="form-control" 
                 name="description" 
                 rows={7} 
-                onChange={handleDescriptionChange}
+                onChange={handleInput}
                 value={description}
                 placeholder="Brief description of the deck" />            
             </div>
+            <button type="submit">{submitButtonText}</button>
         </form>
     </div>)}
 
-export default CreateDeck;
+export default DeckForm;
