@@ -19,16 +19,6 @@
       "name": "Submit Test",
       "description": "Checking to see if the submit returns home",
       "id": 4
-    },
-    {
-      "name": "One more test for TAs",
-      "description": "This is a new deck",
-      "id": 5
-    },
-    {
-      "name": "Does this work?",
-      "description": "Hoping to have this delay submission",
-      "id": 6
     }
   ],
   "cards": [

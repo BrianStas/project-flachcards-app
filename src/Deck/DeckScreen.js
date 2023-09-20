@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { readDeck } from "../utils/api";
+import { deleteDeck, readDeck } from "../utils/api";
 import { useParams, Link } from "react-router-dom/cjs/react-router-dom";
 import CardDisplay from "../Cards/CardDisplay"
 
@@ -25,9 +25,10 @@ function DeckScreen(){
         <div class="mb-4">
             <h3>{deck.name}</h3>
             <p>{deck.description}</p>
-            <Link to="#" class="btn btn-secondary mx-2">Edit</Link>
+            <Link to={`/decks/${deck.id}/edit`} class="btn btn-secondary mx-2">Edit</Link>
             <Link to={`/decks/${deck.id}/study`} class="btn btn-primary ">Study</Link>
-            <Link to="#" class="btn btn-primary mx-2">Add Cards</Link>
+            <Link to={`/decks/${deck.id}/cards/new`} class="btn btn-primary mx-2">Add Cards</Link>
+            <button class="btn btn-danger mr-4 float-right" onClick={()=> deleteDeck(deck.id)}>Delete</button>
         </div>
 
         {cardList.length>0 ? cardList.map((card)=> <CardDisplay card={card} />) : null}

@@ -7,6 +7,8 @@ import { Switch } from "react-router-dom/cjs/react-router-dom.min";
 import { Route } from "react-router-dom/cjs/react-router-dom";
 import Study from "../Study/Study";
 import NewDeck from "../Deck/NewDeck";
+import EditDeck from "../Deck/EditDeck";
+import NewCard from "../Cards/NewCard";
 
 function Layout() {
   return (
@@ -18,8 +20,14 @@ function Layout() {
           <Route exact path="/">
             <Home />
           </Route>
+          <Route path="/decks/:deckId/cards/new">
+            <NewCard />
+          </Route>
           <Route path="/decks/:deckId/study">
             <Study />
+          </Route>
+          <Route path="/decks/:deckId/edit">
+            <EditDeck />
           </Route>
           <Route exact path="/decks/new">
             <NewDeck />

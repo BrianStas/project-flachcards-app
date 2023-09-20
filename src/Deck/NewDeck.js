@@ -4,10 +4,6 @@ import DeckForm from "./DeckForm";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 function NewDeck(){
 
-    // function handleNewDeck(newDeck) {
-    //     createDeck(newDeck).then(data => history.push(`/decks/${data.id}`));
-    //   }
-
     return(
     <div>
         <nav aria-label="breadcrumb">

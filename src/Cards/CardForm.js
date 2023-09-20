@@ -1,9 +1,8 @@
 import React from "react";
-import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useState } from "react";
 
-function DeckForm({initialFormData, onSubmit, submitButtonText}){
-    
+function CardForm({initialFormData, onSubmit, submitButtonText, cancelButtonText}){
     const history = useHistory();
     const [formData, setFormData]=useState(initialFormData)
     
@@ -27,33 +26,35 @@ function DeckForm({initialFormData, onSubmit, submitButtonText}){
         
         <form onSubmit={handleSubmit}>
             <div class="form-group">
-            <label htmlFor="name">
-                Name
-            </label>
-            <input 
-                type="text" 
-                class="form-control" 
-                id="name" 
-                name="name" 
-                onChange={handleInput}
-                value={formData.name}
-                placeholder="Deck Name" />
-            </div>
-            <div class="form-group">
-            <label htmlFor="description">
-                Description  
+            <label htmlFor="front">
+                Front
             </label>
             <textarea 
-                id="description" 
+                id="front" 
                 class="form-control" 
-                name="description" 
-                rows={7} 
+                name="front" 
+                rows={5} 
                 onChange={handleInput}
-                value={formData.description}
-                placeholder="Brief description of the deck" />            
+                value={formData.front}
+                placeholder="Front side of card" /> 
             </div>
-            <button type="submit">{submitButtonText}</button>
+            <div class="form-group">
+            <label htmlFor="back">
+                Back
+            </label>
+            <textarea 
+                id="back" 
+                class="form-control" 
+                name="back" 
+                rows={5} 
+                onChange={handleInput}
+                value={formData.back}
+                placeholder="Back side of card" />            
+            </div>
+            <button type="button">{cancelButtonText}</button>
+            <button type="submit">{submitButtonText}</button>           
         </form>
-    </div>)}
+    </div>)
+}
 
-export default DeckForm;
+export default CardForm;
