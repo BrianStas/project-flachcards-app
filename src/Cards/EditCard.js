@@ -1,20 +1,29 @@
 import React from "react";
 import { readCard, updateCard } from "../utils/api";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom/cjs/react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom/cjs/react-router-dom";
 import CardForm from "./CardForm";
 
-function EditCard({deck}){
+function EditCard({deck, fetchDeck}){
 
+    const history=useHistory();
     const {cardId} = useParams();
     
     const [card, setCard] = useState();
     function fetchCard() {
         readCard(cardId).then(data => setCard(data));
-        console.log("this is working")
       }
+
     useEffect(fetchCard, []);
- console.log(card)
+
+    const onSubmit = (editedCard)=>{
+        updateCard(editedCard)
+        .then(fetchDeck)
+        .then(data =>
+            history.push(`/decks/${deck.id}`))
+    }
+ 
+
     return (
     <div>
         <nav aria-label="breadcrumb">
@@ -26,13 +35,15 @@ function EditCard({deck}){
         </nav>
         {card?.id &&
         <CardForm
-            onSubmit={updateCard}
+            deck = {deck}
+            onSubmit={onSubmit}
             submitButtonText="Submit"
             cancelButtonText="Cancel"
-            initialFormData={card}/>
+            formData={card}
+            setFormData={setCard}/>
         }
     </div>
     )
-}
+    }
 
 export default EditCard;

@@ -39,10 +39,10 @@ function DeckScreen(){
         {cardList.length>0 ? cardList.map((card)=> <CardDisplay card={card} deck={deck}/>) : null}
         </Route>
         <Route path={`${path}/cards/new`}>
-            <NewCard deck={deck} />
+            <NewCard deck={deck} fetchDeck={fetchDeck} />
         </Route>
         <Route path={`${path}/cards/:cardId/edit`}>
-            <EditCard deck={deck} />
+            <EditCard deck={deck} fetchDeck= {fetchDeck}/>
         </Route>
         </Switch>
     </div>)

@@ -58,6 +58,24 @@
       "back": "b",
       "deckId": 1,
       "id": 7
+    },
+    {
+      "front": "LOOK AT THE URL",
+      "back": "IT WON'T WORK",
+      "deckId": 1,
+      "id": 8
+    },
+    {
+      "front": "Once more",
+      "back": "this needs to work",
+      "deckId": 1,
+      "id": 9
+    },
+    {
+      "front": "I love",
+      "back": "using api calls",
+      "deckId": 1,
+      "id": 10
     }
   ]
 }

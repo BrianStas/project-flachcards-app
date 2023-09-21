@@ -2,9 +2,9 @@ import React from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useState } from "react";
 
-function CardForm({initialFormData, onSubmit, submitButtonText, cancelButtonText}){
+function CardForm({formData, setFormData, onSubmit, submitButtonText, cancelButtonText, deck}){
     const history = useHistory();
-    const [formData, setFormData]=useState(initialFormData)
+    
     
     function handleInput(event){
         setFormData({
@@ -16,8 +16,7 @@ function CardForm({initialFormData, onSubmit, submitButtonText, cancelButtonText
     function handleSubmit(event){
         event.preventDefault();
         onSubmit(formData)
-        .then(data =>
-            history.push(`/decks/${data.id}`))
+        
         }
         //     createDeck(newDeck).then(data => history.push(`/decks/${data.id}`));
 
@@ -51,8 +50,8 @@ function CardForm({initialFormData, onSubmit, submitButtonText, cancelButtonText
                 value={formData.back}
                 placeholder="Back side of card" />            
             </div>
-            <button type="button" class="btn btn-secondary mr-3">{cancelButtonText}</button>
-            <button type="submit" class="btn btn-primary">{submitButtonText}</button>           
+            <button type="button" class="btn btn-secondary mr-3" onClick={()=>history.push(`/decks/${deck.id}`)}>{cancelButtonText}</button>
+            <button type="submit" class="btn btn-primary" >{submitButtonText}</button>           
         </form>
     </div>)
 }

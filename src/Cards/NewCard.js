@@ -4,7 +4,21 @@ import CardForm from "./CardForm";
 import { Link, useParams } from "react-router-dom/cjs/react-router-dom";
 import { useState, useEffect } from "react";
 
-function NewCard({deck}){
+function NewCard({deck, fetchDeck}){
+    const [formData, setFormData]=useState({
+        front: '',
+        back: '',
+        })
+
+    const onSubmit=(newCard)=>{
+        console.log(newCard);
+        createCard(deck.id, newCard)
+        .then((result)=>setFormData({
+            front: '',
+            back: '',
+            }))
+        .then(fetchDeck)}
+    
 
     return(
     <div>
@@ -16,13 +30,12 @@ function NewCard({deck}){
             </ol>
         </nav> 
         <CardForm 
-            onSubmit={createCard}
+            deck={deck}
+            onSubmit={onSubmit}
             submitButtonText="Save"
             cancelButtonText="Done"
-             initialFormData={ {
-            front: '',
-            back: '',
-            } }/>
+            formData={formData}
+            setFormData={setFormData}/>
     </div>
     )}
 
