@@ -36,7 +36,7 @@ function DeckScreen(){
             <button class="btn btn-danger mr-4 float-right" onClick={()=> deleteDeck(deck.id)}>Delete</button>
         </div>
 
-        {cardList.length>0 ? cardList.map((card)=> <CardDisplay card={card} deck={deck}/>) : null}
+        {cardList.length>0 ? cardList.map((card)=> <CardDisplay card={card} deck={deck} fetchDeck= {fetchDeck}/>) : null}
         </Route>
         <Route path={`${path}/cards/new`}>
             <NewCard deck={deck} fetchDeck={fetchDeck} />

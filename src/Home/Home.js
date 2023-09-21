@@ -14,7 +14,7 @@ function Home(){
    return (
    <div>
         <Link to="/decks/new" class="btn btn-secondary">+ Create Deck</Link>
-        <DeckList decks={decks}/>
+        <DeckList decks={decks} fetchData={fetchData}/>
     </div>
 )}
 
