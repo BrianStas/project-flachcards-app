@@ -51,8 +51,8 @@ function CardForm({initialFormData, onSubmit, submitButtonText, cancelButtonText
                 value={formData.back}
                 placeholder="Back side of card" />            
             </div>
-            <button type="button">{cancelButtonText}</button>
-            <button type="submit">{submitButtonText}</button>           
+            <button type="button" class="btn btn-secondary mr-3">{cancelButtonText}</button>
+            <button type="submit" class="btn btn-primary">{submitButtonText}</button>           
         </form>
     </div>)
 }

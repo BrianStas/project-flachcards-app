@@ -4,13 +4,7 @@ import CardForm from "./CardForm";
 import { Link, useParams } from "react-router-dom/cjs/react-router-dom";
 import { useState, useEffect } from "react";
 
-function NewCard(){
-    const {deckId} = useParams();
-    const [deck, setDeck] = useState({cards:[]})
-    function fetchDeck() {
-        readDeck(deckId).then(data => setDeck(data));
-      }
-      useEffect(fetchDeck, []);
+function NewCard({deck}){
 
     return(
     <div>

@@ -1,8 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { deleteDeck, readDeck } from "../utils/api";
-import { useParams, Link } from "react-router-dom/cjs/react-router-dom";
+import { useParams, Link, Switch, useRouteMatch, Route} from "react-router-dom/cjs/react-router-dom";
 import CardDisplay from "../Cards/CardDisplay"
+import NewCard from "../Cards/NewCard";
+import EditCard from "../Cards/EditCard";
 
 function DeckScreen(){
     const {deckId} = useParams();
@@ -14,8 +16,11 @@ function DeckScreen(){
       const cardList = (deck.id && deck.cards);
       console.log(cardList);
 
+      const {path} = useRouteMatch();
     if(deck.id){
     return(<div>
+        <Switch>
+            <Route exact path={path}>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><Link to="/">Home</Link></li>
@@ -31,8 +36,15 @@ function DeckScreen(){
             <button class="btn btn-danger mr-4 float-right" onClick={()=> deleteDeck(deck.id)}>Delete</button>
         </div>
 
-        {cardList.length>0 ? cardList.map((card)=> <CardDisplay card={card} />) : null}
-
+        {cardList.length>0 ? cardList.map((card)=> <CardDisplay card={card} deck={deck}/>) : null}
+        </Route>
+        <Route path={`${path}/cards/new`}>
+            <NewCard deck={deck} />
+        </Route>
+        <Route path={`${path}/cards/:cardId/edit`}>
+            <EditCard deck={deck} />
+        </Route>
+        </Switch>
     </div>)
     }
 return "Loading..."}
