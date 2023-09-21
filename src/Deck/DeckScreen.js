@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { deleteDeck, readDeck } from "../utils/api";
-import { useParams, Link, Switch, useRouteMatch, Route} from "react-router-dom/cjs/react-router-dom";
+import { useParams, Link, Switch, useRouteMatch, Route, useHistory} from "react-router-dom/cjs/react-router-dom";
 import CardDisplay from "../Cards/CardDisplay"
 import NewCard from "../Cards/NewCard";
 import EditCard from "../Cards/EditCard";
 
 function DeckScreen(){
+    const history=useHistory();
     const {deckId} = useParams();
     const [deck, setDeck] = useState({cards:[]})
     function fetchDeck() {
@@ -17,7 +18,12 @@ function DeckScreen(){
       console.log(cardList);
 
       const {path} = useRouteMatch();
-    if(deck.id){
+    
+      const deckDeleteHandler = ()=>{if(window.confirm("Delete this deck?\n You will not be able to recover it")){
+        deleteDeck(deck.id)
+        .then(data=> history.push("/"))
+    }}
+      if(deck.id){
     return(<div>
         <Switch>
             <Route exact path={path}>
@@ -33,7 +39,7 @@ function DeckScreen(){
             <Link to={`/decks/${deck.id}/edit`} class="btn btn-secondary mx-2">Edit</Link>
             <Link to={`/decks/${deck.id}/study`} class="btn btn-primary ">Study</Link>
             <Link to={`/decks/${deck.id}/cards/new`} class="btn btn-primary mx-2">Add Cards</Link>
-            <button class="btn btn-danger mr-4 float-right" onClick={()=> deleteDeck(deck.id)}>Delete</button>
+            <button class="btn btn-danger mr-4 float-right" onClick={deckDeleteHandler}>Delete</button>
         </div>
 
         {cardList.length>0 ? cardList.map((card)=> <CardDisplay card={card} deck={deck} fetchDeck= {fetchDeck}/>) : null}
