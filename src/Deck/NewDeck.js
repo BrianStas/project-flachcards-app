@@ -12,6 +12,7 @@ function NewDeck(){
                 <li class="breadcrumb-item active" aria-current="page">Create Deck</li>                
             </ol>
         </nav>
+        {/* calls the form with blank fields and then uses the createDeck API call on submit */}
         <DeckForm 
             onSubmit={createDeck}
             submitButtonText="Submit"

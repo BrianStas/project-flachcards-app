@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom/cjs/react-router-dom";
 import DeckForm from "./DeckForm";
 
 function EditDeck(){
-
+// pulls deck ID from params and uses it for the deck being edited
     const {deckId} = useParams();
     const [deck, setDeck] = useState({cards:[]})
     function fetchDeck() {
@@ -22,6 +22,8 @@ function EditDeck(){
                 <li class="breadcrumb-item active" aria-current="page">Edit Deck</li>
             </ol>
         </nav>
+        {/* first checks that the deck is loaded then sends the update call
+        and the correct submit text with the formData filled out with the deck info */}
         {deck.id &&
         <DeckForm 
             onSubmit={updateDeck}

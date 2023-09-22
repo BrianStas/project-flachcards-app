@@ -16,7 +16,7 @@ function Layout() {
     <>
       <Header />
       <div className="container">
-      
+      {/* handles all page swaps except card functions found in DeckScreen */}
         <Switch>
           <Route exact path="/">
             <Home />

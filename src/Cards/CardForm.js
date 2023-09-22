@@ -5,21 +5,20 @@ import { useState } from "react";
 function CardForm({formData, setFormData, onSubmit, submitButtonText, cancelButtonText, deck}){
     const history = useHistory();
     
-    
+    // tracks the input for when the submit occurs
     function handleInput(event){
         setFormData({
             ...formData,
             [event.target.name]: event.target.value
         })
     }
-
+// calls the onSubmit prop to be handled by either EditCard or NewCard
     function handleSubmit(event){
         event.preventDefault();
         onSubmit(formData)
         
         }
-        //     createDeck(newDeck).then(data => history.push(`/decks/${data.id}`));
-
+// returns the card form for front side and back side of card.
     return (
     <div class="w-100">
         
@@ -50,7 +49,9 @@ function CardForm({formData, setFormData, onSubmit, submitButtonText, cancelButt
                 value={formData.back}
                 placeholder="Back side of card" />            
             </div>
+            {/* the cancel button always sends you back to the deckScreen */}
             <button type="button" class="btn btn-secondary mr-3" onClick={()=>history.push(`/decks/${deck.id}`)}>{cancelButtonText}</button>
+            {/* submit will be handled by EditCard or NewCard */}
             <button type="submit" class="btn btn-primary" >{submitButtonText}</button>           
         </form>
     </div>)

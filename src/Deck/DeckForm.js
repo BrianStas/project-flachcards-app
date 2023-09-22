@@ -3,25 +3,24 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 
 function DeckForm({initialFormData, onSubmit, submitButtonText}){
-    
+    // 3 props to handle the initial form and what happens on submit
     const history = useHistory();
     const [formData, setFormData]=useState(initialFormData)
-    
+// tracks the input as a user types to then use for submit
     function handleInput(event){
         setFormData({
             ...formData,
             [event.target.name]: event.target.value
         })
     }
-
+// sends the form data to use onSubmit from EditDeck or NewDeck then pushes user to deckScreen
     function handleSubmit(event){
         event.preventDefault();
         onSubmit(formData)
         .then(data =>
             history.push(`/decks/${data.id}`))
         }
-        //     createDeck(newDeck).then(data => history.push(`/decks/${data.id}`));
-
+// returns form for Name and Description. This will be filled in for EditDeck use.
     return (
     <div class="w-100">
         
